@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<chapter id="cha.daps.user.deploy">
+ <title>Packaging and Deploying Your Documentation</title>
+ <abstract>
+  <para>
+   This chapter covers the following topics:
+   <itemizedlist>
+    <listitem>
+     <para>
+      Creating TAR archives with all source files, including graphics
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Generating distributable HTML archives
+     </para>
+    </listitem>
+   <!-- <listitem>
+     <para>
+      how to generate JSP TAR archives to integrate your documentation
+      into Web user interfaces (via JSP),
+     </para>
+    </listitem>-->
+    <listitem>
+     <para>
+      Generating page, desktop, or document files to integrate 
+      your documentation in KDE and GNOME desktop environments.
+     </para>
+    </listitem>
+   </itemizedlist>
+  </para>
+ </abstract>
+ <para> For distributing your output formats in a convenient way, &dapsacr;
+  can automatically create TAR archives of the XML sources (including graphics)
+  and various output formats. &dapsacr; uses
+   <literal>bz2</literal> for high compression of the archives and keeps the
+  directory structure when generating the TAR archives. </para>
+ 
+ <para>
+  Create source packages, HTML TAR archives, color PDFs, or JSP TAR archives with
+  the <command>daps package-*</command> commands. By adding the respective
+  options, you can additionally create page files, document files or desktop
+  files for GNOME or KDE desktop environments.
+ </para>
+
+ 
+ <sect1 id="sec.daps.user.deploy.src">
+  <title>Creating a TAR Archive with All Sources (Including Graphics)</title>
+
+  <para>
+   Use the following command to create a distributable TAR archive containing
+   the sources of the complete set, including the graphics:
+  </para>
+
+<screen>&prompt.user;&dapscmd; -d&nbsp;<replaceable>PATH_TO_&dc;_FILE</replaceable> package-src</screen>
+ </sect1>
+ <sect1 id="sec.daps.user.deploy.html">
+  <title>Generating a Distributable HTML Archive</title>
+
+  <para>
+   To generate HTML output and to automatically pack the HTML files, any
+   graphics, and your CSS file into a TAR archive, use the following command:
+  </para>
+
+<screen>&prompt.user;&dapscmd; -d <replaceable>PATH_TO_DC_FILE</replaceable> package-html</screen>
+ </sect1>
+
+ <!--<sect1 id="sec.daps.user.deploy.jsp">
+  <title>Generating a JSP TAR Archive</title>
+
+  <para>
+   To create all archives and files needed for packaging a JSP document, use
+   the following command:
+  </para>
+
+<screen>&prompt.user;daps -d <replaceable>PATH_TO_DC_FILE</replaceable> package-jsp</screen>
+</sect1>-->
+ 
+  <sect1 id="sec.daps.user.deploy.desktops">
+  <title>Generating Desktop, Document, or Page Files</title>
+
+  <para>
+   To create files that you can use for the help system of the GNOME and KDE
+   desktop environments, use one of the following options:
+  </para>
+
+  <itemizedlist>
+   <listitem>
+    <para>
+     For the GNOME help system Yelp: <option> --pagefiles</option>
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     For former Yelp versions: <option> --documentfiles</option>
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     For the KDE3 help system: <option> --desktopfiles</option>
+    </para>
+   </listitem>
+  </itemizedlist>
+
+  <para>
+   For example, to create a distributable HTML archive plus the files for
+   GNOME yelp, use the following command:
+  </para>
+
+<screen>&prompt.user;&dapscmd; -d <replaceable>PATH_TO_DC_FILE</replaceable> package-html --pagefiles</screen>
+ </sect1>
+</chapter>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl" 
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<chapter id="cha.daps.user.layout">
+ <title>Customizing Layout of the Output Formats</title>
+ <abstract>
+  <para>
+   This chapter covers the following topics:
+   <itemizedlist>
+    <listitem>
+     <para>
+      Modifying individual XSLT processor parameters
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Dealing with common customizations to the DocBook stylesheets.
+     </para>
+    </listitem>
+   </itemizedlist>
+  </para>
+ </abstract>
+ <sect1 id="sec.daps.user.layout.xsltparams">
+  <title>Modifying Individual XSLT Processor Parameters</title>
+
+  <para> If you use the default DocBook layout and want to adjust individual parameters, add
+   the <option>--param "KEY=VALUE"</option> or the <option>--stringparam "KEY=VALUE"</option>
+   option. Both options can be added  multiple times, and they work with the following
+   subcommands that specify the output formats: </para>
+  <itemizedlist>
+   <listitem>
+    <para>epub</para>
+   </listitem>
+   <listitem>
+    <para>html</para>
+   </listitem>
+   <listitem>
+    <para>man</para>
+   </listitem>
+   <listitem>
+    <para>pdf</para>
+   </listitem>
+   <listitem>
+    <para>text</para>
+   </listitem>
+   <listitem>
+    <para>webhelp</para>
+   </listitem>
+  </itemizedlist>
+  <para>The options pass on values for XSLT parameters directly to the XSLT processor, which is
+  useful to temporarily overwrite style sheet parameters such as margins.
+  </para>
+  
+  <note>
+   <title><parameter>XSLTPARAM</parameter> And <option>--xsltparam</option></title>
+   <para>For compatibility reasons, &dapsacr; still supports the use of
+     the <option>--xsltparam</option> command-line option, but it will be removed in future
+    versions. Use <option>--param "KEY=VALUE"</option> or <option>--stringparam "KEY=VALUE"</option>
+    instead.</para>
+   <para>However, if you want to specify your settings in the &dc; file instead of using the
+    command line options, the respective parameter is still named
+    <parameter>XSLTPARAM</parameter>.</para>
+  </note>
+  
+  <para>
+   For larger or more complex modifications, such as adjustments of the
+   title page layout, for example, it is advisable to create your own set
+   of stylesheets instead.
+  </para>
+
+  <para>
+   For a list of XSLT parameters to modify, refer to one of the following references at
+   <ulink 
+   url="http://docbook.sourceforge.net/release/xsl/current/doc/index.html"/>:
+  </para>
+
+  <itemizedlist>
+   <listitem>
+    <para>
+     HTML Parameter Reference:
+     <ulink
+       url="http://docbook.sourceforge.net/release/xsl/current/doc/html/index.html"
+      />
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     FO Parameter Reference:
+     <ulink
+       url="http://docbook.sourceforge.net/release/xsl/current/doc/fo/index.html"
+      />
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+     Man Pages Parameter Reference:
+     <ulink
+     url="http://docbook.sourceforge.net/release/xsl/current/doc/manpages/index.html"/>
+    </para>
+   </listitem>
+  </itemizedlist>
+
+  <example>
+   <title>Adjusting the Layout of Variable Lists</title>
+   <para>
+    By default, the DocBook stylesheets display the contents of a
+      <sgmltag>variablelist</sgmltag> as a table. To change this temporarily,
+      set the parameter <parameter>variablelist.as.table</parameter> to <literal>0</literal> by executing the following command:
+   </para>
+   <screen>&prompt.user;&dapscmd; -d  &nbsp;<replaceable>PATH_TO_&dc;_FILE</replaceable>&nbsp;html \
+--param<co id="co.xsltparam"/>&nbsp;"variablelist.as.table<co id="co.param"/>=0"<co id="co.value"/> \
+--param&nbsp;"variablelist.term.break.after=1" \
+--stringparam<xref linkend="co.xsltparam"/>&nbsp;"paper.type=A4"</screen>
+   <calloutlist>
+    <callout arearefs="co.xsltparam">
+     <para>
+      As value of <option>--param</option> or <option>--stringparam</option>, add an
+      <literal>xsltproc</literal> parameter in the form of
+      <replaceable>PARAM_NAME</replaceable>=<replaceable>VALUE</replaceable>" <remark>dpopov 2016-10-11: This sentence is confusing.</remark>
+      .
+     </para>
+     <para>
+      <replaceable>VALUE</replaceable> can be an integer or XPATH expression
+      for <option>--param</option> and a string for <option>--stringparam</option>.
+     </para>
+    </callout>
+    <callout arearefs="co.param">
+     <para>
+      Name of the parameter to adjust.
+     </para>
+    </callout>
+    <callout arearefs="co.value">
+     <para>
+      Value for <xref linkend="co.param" xrefstyle="select:label nopage"/>.
+      It will be passed on unmodified to the XSLT processor call that
+      creates the <filename>.fo</filename> file or HTML from the profiled
+      XML sources.
+     </para>
+    </callout>
+   </calloutlist>
+   <para>
+    Alternatively, you can add the <varname>XSLTPARAM</varname> parameter to the &dc; file of
+    your project and specify the parameters there. If doing so, also add
+    <literal>--stringparam</literal> or <literal>--param</literal>.
+   </para>
+   <para>
+    Either specify all parameters in a single line:
+   </para>
+   <screen>XSLTPARAM="--stringparam&nbsp;<replaceable>PARAM_NAME</replaceable>=<replaceable>VALUE</replaceable> --param&nbsp;<replaceable>PARAM_NAME</replaceable>=<replaceable>VALUE</replaceable>"</screen>
+   <para>
+    or in multiple lines:
+   </para>
+   <screen>XSLTPARAM="--stringparam&nbsp;<replaceable>PARAM_NAME</replaceable>=<replaceable>VALUE</replaceable>"
+XSLTPARAM="$XSLTPARAM --param&nbsp;<replaceable>PARAM_NAME</replaceable>=<replaceable>VALUE</replaceable>"</screen>
+  </example>
+ </sect1>
+ 
+ <sect1 id="sec.daps.user.layout.txt">
+  <title>Specifying the Layout for ASCII Text Output</title>
+  <para>You can set parameters in &dapsconf-sys; or &dapsconf-user; using the
+    <parameter>TXT_PARAMS</parameter> parameter. Alternatively, set them from the command line, using the
+    <option>--param</option>/<option>--stringparam</option> options. By
+   default, the stylesheets specified with the <parameter>STYLEROOT</parameter> parameter or
+    the <option>--styleroot</option> option are used for generating ASCII text output.</para>
+  <para>However, if you want to ignore any STYLEROOT definitions, set
+   <literal>TXT_IGNORE_STYLEROOT="yes"</literal> in &dapsconf-sys; or &dapsconf-user; or use the
+   <option>--ignore-styleroot</option> option on the command line: </para>
+  <screen>&prompt.user;&dapscmd; -d <replaceable>PATH_TO_DC_FILE</replaceable> text --ignore-styleroot</screen>
+ </sect1>
+ 
+ <sect1 id="sec.daps.user.layout.styleheets">
+  <title>Customizing the DocBook Stylesheets</title>
+  <para>
+    This section describe how you can use customs stylesheets.  There are many
+    reasons why it would be preferable to create your own customization layer.
+    Perhaps you want to change the layout or style of your project, change the
+    behaviour how an element is processed or want to create a corporate style.
+  </para>
+  <important>
+    <para>
+	  The reader should be aware of that some knowledge about XSLT is needed.
+	  Basic customizations like parameter changes can be done by simple adding
+	  a line with:
+      <screen>&lt;xsl:param name="PARAMETER_NAME" select="VALUE"/></screen>
+      The available parameters are format dependent and are listed in the
+      <ulink url="http://docbook.sourceforge.net/release/xsl/current/doc/param.html">"XSL Stylesheets Reference Documentation"</ulink>.
+    </para>
+  </important>
+  <para>
+    Best practice is to store the stylesheets in a <filename>xslt</filename>
+    directory as the top-level directory with different subdirectories for all
+    formats.  Depending on which formats are supported, this top-level
+    directory could be integrated into your project directory like this:
+    <example id="example.filehierarchy">
+      <title>Best Practice File Hierarchy</title>
+      <programlisting>
+        YOUR_DOC_DIR/
+         |
+         +-- DC-files
+         +-- xml/
+              +--- your XML files...
+         +-- xslt/
+              +-- fo/
+                   +-- docbook.xsl
+              +-- html/
+                   +-- docbook.xsl
+                   +-- chunk.xsl
+               +-- [additional formats, supported by DB XSL]
+                   +-- docbook.xsl
+      </programlisting>
+  </example>
+
+    Finaly include the <varname>STYLEROOT</varname> variable in your DC files,
+    pointing to the xslt directory. 
+  </para>
+  <note>
+    <para>
+      It is recomended to also set the <varname>FALLBACK_STYLEROOT</varname>
+      variable which is used in case the custom stylesheets defined with
+      <varname>STYLEROOT</varname> cannot be accessed.
+    </para>
+  </note>
+  <para>
+    In the following procedure we will create the directory stucture for
+    customizations of the HTML output.  For other formats, replace "html" with
+    the approperiate name, e.g.: "fo".
+  </para>
+  <procedure>
+  <title>Create a Styleroot Directory for the HTML Format</title>
+    <para>
+    </para>
+   <step>
+    <para>
+     Inside your project directory, create the styleroot hierarchy:
+    </para>
+    <screen>&prompt.user;mkdir -p xslt/html </screen>
+    <para>
+    </para>
+   </step>
+   <step>
+    <para>
+      Make your customizations inside <filename>xslt/html/docbook.xsl</filename>:
+    </para>
+    <example id="example.customizationlayer">
+      <title>General Customization Layer</title>
+      <programlisting>
+        <![CDATA[
+<xsl:stylesheet version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:d="http://docbook.org/ns/docbook">
+
+  <xsl:import href="http://docbook.sourceforge.net/release/xsl-ns/current/html/docbook.xsl"/>
+
+  <!-- Your customizations go here -->
+
+</xsl:stylesheet>
+                ]]>
+      </programlisting>
+    </example>
+   </step>
+   <step>
+    <para>
+      In your DC files, set the STYLEROOT variable to <filename>xslt</filename>.
+    </para>
+    <screen>STYLEROOT="xslt"</screen>
+   </step>
+  </procedure>
+  <para>
+   Useful tips and tricks on using DocBook and the DocBook stylesheets
+   can be found in <citetitle>The DoCookBook&mdash;Recipes for DocBook
+   Developers and Writers</citetitle>, available at
+   <ulink url="http://doccookbook.sourceforge.net/"></ulink> and in 
+   <citetitle>DocBook XSL Stylesheets: Reference Documentation</citetitle> 
+   available at <ulink url="http://docbook.sourceforge.net/release/xsl/current/doc/index.html"></ulink>.
+  </para>
+ </sect1>
+</chapter>

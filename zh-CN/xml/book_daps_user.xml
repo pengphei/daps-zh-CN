@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<book lang="en" id="book.daps.user">
+ <title>User Guide</title>
+ <bookinfo>
+  <productname>&dapsacr;</productname>
+  <productnumber>&dapsversion;</productnumber>
+  <authorgroup>
+   <author><firstname>Tanja</firstname><surname>Roth</surname><email>ta-ro@opensuse.org</email>
+   </author>
+   <author><firstname>Stefan</firstname><surname>Knorr</surname><email>sknorr@suse.de</email>
+   </author>
+  </authorgroup>
+  <othercredit><firstname>Thomas</firstname><surname>Schraitle</surname>
+    <contrib>Technical review</contrib>
+  </othercredit>
+  <othercredit><firstname>Frank</firstname><surname>Sundermeyer</surname>
+    <contrib>Technical review</contrib>
+  </othercredit>
+  <releaseinfo>&dapsversion;</releaseinfo>
+   <date><?dbtimestamp?></date>
+   <xi:include href="common_copyright_gfdl.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <keywordset>
+   <keyword>&dapsacr;</keyword>
+   <keyword>&dapslong;</keyword>
+   <keyword>DocBook</keyword>
+   <keyword>XML</keyword>
+   <keyword>Toolchain</keyword>
+   <keyword>User Guide</keyword>
+  </keywordset>
+  <abstract>
+   <para>(<ulink url="pdf/book.daps.user_color_en.pdf">PDF</ulink>)</para>
+   <para>&daps-description-short;</para>
+   <para>&daps-userguide-abstract;</para>
+  </abstract>
+
+ </bookinfo>
+ <xi:include href="daps_user_intro.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_install.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_concept.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<!--taroth 2012-05-08: obsolete (covered in DAPS Quick)-->
+<!--<xi:include href="daps_user_create.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>-->
+ <xi:include href="daps_user_edit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_output.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_images.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_modularize.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_review.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_deploy.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_layout.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_config.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_trouble.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_glossary.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<!--taroth 2012-03-20 todo: include daps config file here-->
+<!--<xi:include href="daps_config_file.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>-->
+ <xi:include href="daps_user_migrate.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_editors.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+ <xi:include href="daps_user_docupdates.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<!--taroth 2012-05-08 todo: appendix how to create custom aspell wordlist
+   (rather DAPS Developer Guide)-->
+<!--<xi:include href="daps_devel_aspell.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>-->
+ <xi:include href="common_legal.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</book>

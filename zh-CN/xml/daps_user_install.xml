@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<chapter id="cha.daps.user.inst">
+ <title>System Requirements and Installation</title>
+ <abstract>
+  <para>
+   This chapter covers the following topics:
+   <itemizedlist>
+    <listitem>
+     <para>
+      Hardware requirements for running &dapsacr;
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Installing &dapsacr; on &osuse; and &sle;
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Building and installing &dapsacr; on other Linux* distributions
+     </para>
+    </listitem>
+   </itemizedlist>
+  </para>
+ </abstract>
+ <sect1 id="sec.daps.user.req">
+  <title>System Requirements</title>
+  &daps-sys-req-general;
+  <sect2 id="sec.daps.user.req.hw">
+   <title>Hardware Requirements</title>
+   &daps-sys-req-hw;
+  </sect2>
+
+  <sect2 id="sec.daps.user.req.sw">
+   <title>Software Requirements</title>
+   &daps-sys-req-sw;
+ </sect2>
+
+  <sect2 id="sec.daps.user.addon.sw">
+   <title>Additional Software</title>
+   &daps-addon;
+  </sect2>
+ </sect1>
+ <sect1 id="sec.daps.user.inst">
+  <title>Installation</title>
+  &daps-install;
+  
+  <sect2 id="sec.daps.user.inst.osuse">
+   <title>Installing &dapsacr; on &osuse;</title>
+      &daps-install-osuse;
+      &daps-install-osuse-zypper;
+  </sect2>
+  
+  <sect2 id="sec.daps.user.inst.sle">
+   <title>Installing &dapsacr; on &sle;</title>
+   &daps-install-sle;
+    
+  </sect2>
+
+  <sect2 id="sec.daps.user.inst.tarball">
+   <title>Installing &dapsacr; on Other Linux Distributions</title>
+   <para>For the latest status update and installation instructions, refer to    
+    <ulink url="https://github.com/openSUSE/daps/blob/master/INSTALL.adoc"/>.
+   </para>
+  </sect2>
+ </sect1>
+</chapter>
