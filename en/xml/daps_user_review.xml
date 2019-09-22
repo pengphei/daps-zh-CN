@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<chapter id="cha.daps.user.review">
+ <title>Review and Translation Processes</title>
+ <abstract>
+  <para>
+   This chapter describes how to simplify review and translation processes
+   with &dapsacr; either by including remarks, <!-- metadata -->or draft
+   watermarks in the output, or by transforming the multiple DocBook files in
+   your project into one big XML file.
+  </para>
+   <!-- <listitem>
+     <para>or by creating different TAR archives which to hand over to
+     your localization team or agency.</para>
+    </listitem>-->
+ </abstract>
+ <sect1 id="sec.daps.user.review.output.special">
+  <title>Including Remarks <!-- Metadata -->or Draft Watermarks in the Output</title>
+
+  <para>
+   &dapsacr; offers several features to simplify review and translation
+   processes. For example, you can insert <sgmltag>remark</sgmltag> elements
+   in the source code (for editorial remarks or questions to the proofreader)
+   and generate an output format that either includes or suppresses
+   <remark>dpopov 2016-10-12: perhaps shows/hides is more descriptive than
+   includes/suppresses?</remark> these remarks. You can also generate preview
+   versions of your documentation with a <literal>DRAFT</literal> watermark
+   appearing on the HTML or PDF output.
+  </para>
+
+  <!-- taroth 2015-04-15: commenting for now, can hopefully be re-enabled after
+   the dm relaunch
+   <para>
+   If you use &dm; in addition to &dapsacr;, you can <quote>flag</quote>
+   your XML files with meta-information (like workflow status). &dapsacr;
+   offers an option to also display this meta-information in the generated
+   output.
+  </para>-->
+
+&daps-note-output-adv;
+ 
+  <para>
+   Find a few example commands below:
+  </para>
+
+  <variablelist>
+   <varlistentry>
+    <term>Including Remarks in the Output</term>
+    <listitem>
+     <screen>&prompt.user;&dapscmd; -d&nbsp;<replaceable>PATH_TO_&dc;_FILE</replaceable> pdf --remarks</screen>
+     &daps-output-remarks;
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>Building PDFs with a <literal>DRAFT</literal> Watermark</term>
+    <listitem>
+     <screen>&prompt.user;&dapscmd; -d&nbsp;<replaceable>PATH_TO_&dc;_FILE</replaceable> pdf --draft</screen>
+     <para>
+      Generates a PDF that has a <literal>DRAFT</literal> watermark printed
+      on each page.
+     </para>
+    </listitem>
+   </varlistentry>
+   <!--<varlistentry>
+    <term>Including Metadata in the Output</term>
+    <listitem>
+     <screen>&prompt.user;daps
+     -d&nbsp;<replaceable>PATH_TO_&dc;_FILE</replaceable> html -/-meta</screen>
+     <para> If metadata to a file has been set, &dapsacr; includes the
+     metadata for each file in the output format. </para>
+     <note>
+      <title>Restrictions of the <option>-/-meta</option> Option</title>
+      <para>As the <option>-/-meta</option> relies on certain mechanisms and SVN
+       properties, including metadata in the output only works under the
+       following conditions:</para>
+      <itemizedlist>
+       <listitem>
+        <para>Profiling is activated in your XML sources. For details, refer to
+          <xref linkend="sec.daps.user.modular.profile.daps.pi"/>.</para>
+       </listitem>
+       <listitem>
+        <para>You manage your documentation project with &dm; and have set
+         the respective SVN properties.</para>
+       </listitem>
+      </itemizedlist>
+      <para>By default, the HTML and HTML-single outputs then show file name,
+       file maintainer and workflow status, and additionally the ID of the
+       chapter, appendix or prefix, if available.
+       <remark>taroth 2014-10-28: the following also no longer seems to be true...: The PDF output
+        shows filename and the ID of the chapter, appendix or prefix, if available.</remark>
+      </para>
+     </note>
+     </listitem>
+   </varlistentry>-->
+  </variablelist>
+ </sect1>
+ <sect1 id="sec.daps.user.review.bigfile">
+  <title>Creating XML Big Files</title>
+
+  <para> Instead of sending multiple XML files to a proofreader for review, you can transform all
+   files included in your <sgmltag>book</sgmltag> or <sgmltag>set</sgmltag> into one huge DocBook
+   XML file (big file). Use the following command: </para>
+
+  <screen>&prompt.user;&dapscmd; -d <replaceable>PATH_TO_&dc;_FILE</replaceable> bigfile</screen>
+  <para> &dapsacr; resolves all XIncludes (replaces them with the referenced content) to create
+   the big file. A message is shown where to find the generated output. </para>
+
+  <para>
+   Sometimes error messages point to a line containing an
+   <sgmltag>&lt;xi:include/&gt;</sgmltag> tag and the real error is hidden
+   somewhere inside the included file. Using the option
+   <option>--novalid</option> allows you to build and validate a single XML
+   file where error messages points to their occurrences in the bigfile. Use
+   the following command as an example:
+  </para>
+
+  <screen>&prompt.user;&dapscmd; -d&nbsp;<replaceable>PATH_TO_&dc;_FILE</replaceable> bigfile --novalid</screen>
+
+ </sect1>
+ <!--<sect1 id="sec.daps.user.review.locdrop">
+  <title>Creating TAR Archives For Localization</title>
+  <para> If you have a huge documentation project of which only individual books or files are to be
+   translated, you can mark the respective files as <literal>to be translated</literal> with
+   &dm;. You can then use the <command>&dapscmd; locdrop</command> command to generate the
+   following archives for distribution to the translators or translation agency: </para>
+  <itemizedlist>
+   <listitem>
+    <para>One TAR archive contains the graphics.</para>
+   </listitem>
+   <listitem>
+    <para>One TAR archive contains all XML files that need to be localized.</para>
+   </listitem>
+   <listitem>
+    <para>One TAR archive contains the remaining files of the set. The remaining files are
+     needed for solving any cross-references between translated and untranslated content during
+     generation of output.</para>
+   </listitem>
+  </itemizedlist>
+
+
+  <screen>&prompt.user;daps -d&nbsp;<replaceable>PATH_TO_&dc;_FILE</replaceable> locdrop</screen>
+
+  <note>
+   <title>Restrictions of <command>daps locdrop</command></title>
+   <para> Use this command only if you manage your documentation project with &dm; and have set
+    the respective SVN properties to mark any files that are to be localized. Otherwise it will not
+    work correctly.<remark>taroth 2013-01-11: add link to &dm; docs as soon as they are
+     available</remark>
+   </para>
+  </note>
+
+
+  <para> For further options related to creating distributable archives with &dapsacr;, run
+   <command>daps -/-help</command> or see <xref linkend="cha.daps.user.deploy"/> for more
+   information. </para>
+ </sect1>-->
+</chapter>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<book lang="en" id="book.daps.quick">
+ <title>Quick Start</title>
+ <bookinfo>
+   <productname>&dapsacr;</productname>
+  <productnumber>&dapsversion;</productnumber>
+   <date><?dbtimestamp format="B d, Y"?></date>
+   <keywordset>
+      <keyword>&dapsacr;</keyword>
+      <keyword>&dapslong;</keyword>
+      <keyword>DocBook</keyword>
+      <keyword>XML</keyword>
+      <keyword>Tool chain</keyword>
+      <keyword>Quick Start</keyword>
+    </keywordset>
+   <abstract>
+    <para>(<ulink url="pdf/art.daps.quick_color_en.pdf">PDF</ulink>)</para>
+       <para>The &dapsquick; is a short introduction to &dapsacr; for 
+           technical writers. It includes step-by-step instructions 
+           for key editing and publishing tasks.
+       </para>
+   </abstract>
+  <xi:include os="osuse" href="common_copyright_gfdl.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+ </bookinfo>
+ <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="art_daps_quick.xml"/>
+ <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="art_daps_tutorial.xml"/>
+ <article role="notoc">
+  <title>Legal Information</title>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="common_gfdl_i.xml"/>
+ </article>
+</book>

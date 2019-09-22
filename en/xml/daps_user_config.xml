@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<chapter id="cha.daps.user.config">
+ <title>Configuring &dapsacr;</title>
+ <abstract>
+  <para>
+   This chapter covers the following topic:
+   <itemizedlist>
+    <listitem>
+     <para>
+      Customizing &dapsacr; behavior with a local
+      configuration file
+     </para>
+    </listitem>
+    <!--<listitem>
+     <para>
+      an example of a system-wide &dapsacr; configuration file, including
+      annotations for all parameters that you can modify.
+     </para>
+    </listitem>-->
+   </itemizedlist>
+   <remark>taroth 2013-04-12: todo: also add example of &dapsconf-user; for
+    the future</remark>
+  </para>
+ </abstract>
+    &daps-config;
+ <para>
+  For adjusting a few parameters that you want to set to custom values, do
+  <emphasis>not </emphasis> edit the system-wide &dapsacr; configuration
+  file. Instead, check if the file &dapsconf-user; already exists. If not,
+  create the file and modify it as described below:
+ </para>
+ <procedure>
+  <step>
+   <para>
+    Open both &dapsconf-user; and &dapsconf-sys; in a text editor.
+   </para>
+  </step>
+  <step>
+   <para>
+    Select which parameters you want to modify.
+   </para>
+  </step>
+  <step>
+   <para>
+    Copy <emphasis>only those</emphasis> to &dapsconf-user;.
+   </para>
+   <note>
+    <title>Parameter Incompatibilities Between Configuration Files</title>
+    <para>
+     Copying <emphasis>all</emphasis> parameters from &dapsconf-sys; to
+     &dapsconf-user; increases the risk of parameter incompatibilities when
+     you update to a higher &dapsacr; version.  As the settings in the custom
+     &dapsacr; configuration file will override the settings in &dapsconf-sys;
+     by default, any parameter incompatibilities between the files may lead to
+     unexpected behavior of &dapsacr;.
+    </para>
+   </note>
+  </step>
+  <step>
+   <para>
+    Save &dapsconf-user; and test if your changes produce the expected
+    results.
+   </para>
+  </step>
+ </procedure>
+ <para>For a list of all parameters including a short description of each
+  parameter, see &dapsconf-sys; in your installed system or <ulink
+   url="https://github.com/openSUSE/daps/blob/master/etc/config.in"/>.</para>
+</chapter>

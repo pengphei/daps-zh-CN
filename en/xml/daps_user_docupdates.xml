@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl" 
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<appendix id="app.daps.user.docupdates">
+ <title>What's New?</title>
+ <para>For a detailed list of new features, or any changes to &dapsacr;, see
+  the change log of the <systemitem class="resource">&daps;</systemitem>
+  package in your installed system. The change log for the latest released
+  &dapsacr; version is also available online at <ulink
+   url="https://github.com/openSUSE/daps/blob/master/ChangeLog"/>. </para>
+</appendix>

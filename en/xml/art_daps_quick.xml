@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet
+ href="urn:x-daps:xslt:profiling:docbook45-profile.xsl"
+ type="text/xml"
+ title="Profiling step"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.docbook.org/xml/4.5/docbookx.dtd"
+[<!ENTITY % entities SYSTEM "entity-decl.ent">
+%entities;
+]>
+<article lang="en" id="art.daps.quick">
+ <?suse-quickstart columns="no" version="2" color="daps" url="../"?>
+ <title>Quick Start</title>
+ <articleinfo>
+  <productname>&dapsacr;</productname>
+  <productnumber>&dapsversion;</productnumber>
+  <authorgroup>
+   <author>
+    <firstname>Stefan</firstname>
+    <surname>Knorr</surname>
+   </author>
+   <author>
+    <firstname>Tanja</firstname>
+    <surname>Roth</surname>
+   </author>
+   <author>
+    <firstname>Manuel</firstname>
+    <surname>Schnitzer</surname>
+   </author>
+   <author>
+    <firstname>Christopher-Julian</firstname>
+    <surname>Zwickl</surname>
+   </author>
+  </authorgroup>
+  <date><?dbtimestamp?></date>
+ </articleinfo>
+ <abstract>
+  <para>&daps-description-short;</para>
+  <para>&daps-quickstart-abstract;</para>
+ </abstract>
+ <sect1 id="sec.daps.quick.audience">
+  <title>Target Audience</title>
+  <para>
+   &audience;
+  </para>
+ </sect1>
+ <sect1 id="sec.daps.quick.dbversions">
+  <title>Supported DocBook Versions</title>
+
+  <para>
+   &daps-db-versions;
+  </para>
+ </sect1>
+ <sect1 id="sec.daps.quick.req">
+  <title>System Requirements</title>
+
+  &daps-sys-req-general;
+  <sect2 id="sec.daps.quick.req.hw">
+   <title>Hardware Requirements</title>
+   &daps-sys-req-hw;
+  </sect2>
+
+  <sect2 id="sec.daps.quick.req.sw">
+   <title>Software Requirements</title>
+   &daps-sys-req-sw;
+   <para>For installing &dapsacr; from the sources on other Linux distributions, refer
+    to <ulink url="https://github.com/openSUSE/daps/blob/master/INSTALL.adoc"/> where the
+    respective requirements are covered in detail.</para>
+  </sect2>
+  <sect2 id="sec.daps.quick.addon.sw">
+   <title>Additional Software</title>
+   &daps-addon;
+  </sect2>
+
+  <sect2 id="sec.daps.quick.req.further">
+   <title>Directory Structure</title>
+   <para>
+    For &dapsacr; to work out of the box, it requires a certain organization
+    of your DocBook XML files and images within your documentation directory. For
+    details, refer to <xref linkend="sec.daps.quick.basics.dirstruct"/>. You
+    can generate the necessary structure with the &dapsacr; initialization
+    script, <command>daps-init</command>. For instructions on how to make
+    existing DocBook projects compatible with &dapsacr;, refer to
+    <xref linkend="sec.daps.quick.migrate"/>.
+   </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="sec.daps.quick.inst">
+  <title>Installation</title>
+  &daps-install;
+
+  <sect2 id="sec.daps.quick.inst.osuse">
+   <title>Installing &dapsacr; on &osuse;</title>
+   &daps-install-osuse;
+   &daps-install-osuse-zypper;
+  </sect2>
+  
+  <sect2 id="sec.daps.quick.inst.sle">
+   <title>Installing &dapsacr; on &sle;</title>
+   &daps-install-sle;
+  </sect2>
+  
+
+  <sect2 id="sec.daps.quick.inst.other">
+   <title>Installing &dapsacr; on Other Linux Distributions</title>
+   <para>For the latest status update and installation instructions, refer to    
+    <ulink url="https://github.com/openSUSE/daps/blob/master/INSTALL.adoc"/>.
+   </para>
+   </sect2>
+
+  <sect2 id="sec.daps.quick.inst.formatter">
+   <title>Installing and Configuring the FO Formatter</title>
+   <para>
+    For installation and configuration of an FO formatter (for generating PDF
+    output), refer to its installation instructions (or to your system
+    administrator). For FOP, you usually only need to install the respective
+    FOP package. However, not all FOP packages contain the hyphenation pattern
+    files. Using the hyphenation patterns is recommended.  <remark>taroth
+    2012-03-26: todo - mention download from offo.sourceforge.net in
+    troubleshooting section and add xref</remark> <remark>dpopov 2016-10-10:
+    What's FOP?</remark>
+   </para>
+  </sect2>
+ </sect1>
+ <sect1 id="sec.daps.quick.basics">
+  <title>Defining Documentation Projects</title>
+
+  <para>
+   The easiest way to set up a new documentation project from scratch is to
+   use the &dapsacr; initialization script <command>daps-init</command>. For
+   instructions how to do so, refer to <xref linkend="pro.daps.init"
+    xrefstyle="select:label"/>. The
+   script automatically creates the
+   <xref linkend="sec.daps.quick.basics.dirstruct" xrefstyle="select:title"/>
+   and
+   <xref linkend="sec.daps.quick.basics.files" xrefstyle="select:title"/>
+   that you need to get started with &dapsacr;.
+  </para>
+
+  <sect2 id="sec.daps.quick.basics.dirstruct">
+   <title>Directory Structure</title>
+<!--taroth 2012-04-26: cave, same contents in DAPS User Guide
+  (daps_user_concept.xml, id=sec.daps.user.basics.dirstruct)-->
+<!--taroth 2012-04-26: impossible to source out to phrases-decl.ent and
+  include it multiple times (callout IDs!)-->
+   <para>
+   &dapsacr; requires your XML files and images to be
+   organized in a specific structure within your documentation directory.
+    <xref linkend="ex.daps.quick.dir.doc"/> shows the required structure
+    including the key files for a &dapsacr; documentation project. You can
+    also create multiple documentation directories for individual
+    documentation projects, but they all need the substructure outlined
+    below.
+   </para>
+   <example id="ex.daps.quick.dir.doc">
+    <title>Directory Structure</title>
+    <screen><replaceable>YOUR_DOC_DIR/</replaceable><co id="co.quick.docdir.base"/>
+  |--&dc;*<co id="co.quick.docdir.dc"/>
+     |--images/
+     |   |--src/<co id="co.quick.docdir.img.src"/>
+     |      |--dia/
+     |      |--eps/
+     |      |--fig/
+     |      |--jpg/
+     |      |--pdf/
+     |      |--png/
+     |      |--svg/
+     |--xml/<co id="co.quick.docdir.xml"/>
+         |--MAIN*.xml<co id="co.quick.docdir.main"/>
+         |--*.xml</screen>
+   </example>
+   <calloutlist>
+    <callout arearefs="co.quick.docdir.base">
+     <para>
+      <quote>Working directory</quote> for the respective documentation
+      project (in the following also called <literal>project 
+       directory</literal> or <literal>documentation directory</literal>).
+     </para>
+    </callout>
+    <callout arearefs="co.quick.docdir.dc">
+     <para>
+       &dclong; file (or files) defining the documentation project (books, articles).
+<!--For more information,
+      refer to <xref linkend="sec.daps.user.oview.docproject"/>.--></para>
+    </callout>
+    <callout arearefs="co.quick.docdir.img.src">
+     <para>
+      Top-level directory for any original images that you want to use in
+      the documentation project. This directory contains subdirectories for images in
+      various formats. Any images to be referenced in the XML sources must
+      be put in the respective subdirectories. For information about
+      referencing images, refer to
+      <xref linkend="sec.daps.quick.imgs.refer"/>.
+     </para>
+    </callout>
+    <callout arearefs="co.quick.docdir.xml">
+     <para>
+      Directory holding the XML &main; file and all other XML files for the
+      documentation project. If you declare entities in one or more external
+      files (for example, in <filename>entity-decl.ent</filename>), put the
+      entity declaration files here, too.
+     </para>
+    </callout>
+    <callout arearefs="co.quick.docdir.main">
+     <para>
+      The &main; file of the documentation project. It contains the
+      <quote>starting point</quote> (the highest-level object) of your
+      documentation project and includes
+      <quote>references</quote> to other books, chapters, appendixes, etc. For more
+      information, refer to <xref linkend="sec.daps.quick.basics.files"/>.
+     </para>
+    </callout>
+   </calloutlist>
+  &daps-note-subdirs;
+  </sect2>
+  
+  <sect2 id="sec.daps.quick.basics.files">
+   <title>Key Files</title>
+   &daps-key-files;
+  </sect2>
+  
+  <sect2 id="sec.daps.quick.basics.namereq">
+   <title>File Name Requirements</title>
+   &daps-file-names-req;
+  </sect2>
+  
+  
+ </sect1>
+ <sect1 id="sec.daps.quick.init">
+  <title>A Documentation Project From Scratch</title>
+
+  <para> Use <command>daps-init</command> to set up a new documentation project
+   from scratch. The init script automatically creates the key files and
+   directory structure you need to get started with &dapsacr;. By default,
+   it creates a DocBook article as example file. By adding options you can
+   modify parameters (such as changing the root element to
+    <sgmltag>book</sgmltag> or specifying the DocBook version in which you want
+   the example to be generated). View the available options with
+   <command>daps-init -h</command>. 
+  </para>
+
+  <procedure id="pro.daps.init">
+   <title>Using <command>daps-init</command>
+   </title>
+    <step>
+    <para>To create a working environment for
+     &dapsacr; , including an example document, enter the following: </para>
+    <screen>&prompt.user;<command>daps-init --docdir&nbsp;<replaceable>PATH_TO_DOC_DIR</replaceable></command></screen>
+    <para>
+      Specifying the project directory with <option>--docdir</option> is
+      mandatory. If the directory does not exist, &dapsacr; prompts you to
+      create it.
+    </para>
+     <para>If you want to modify the file name and the title for the document,
+      use the options <option>--name</option> and <option>--title</option>:
+     </para>
+     <screen>&prompt.user;<command>daps-init --docdir&nbsp;<replaceable>PATH_TO_DOC_DIR</replaceable> \
+    --name&nbsp;"my_document" \
+    --title&nbsp;"Example Documentation"</command></screen>
+    </step>
+   <step>
+    <para>If you want to create an example book file in addition to the article,
+     enter the following:</para>
+    <screen>&prompt.user;<command>daps-init
+     --docdir&nbsp;<replaceable>PATH_TO_DOC_DIR</replaceable>&nbsp;--rootelement book</command></screen></step>
+   <step>
+    <para>
+     To see what the output of the XML example file looks like, follow the
+     instructions on the screen. </para>
+      <para><!-- For creation of the PDF, &dapsacr; uses FOP by default (if no
+       other formatter is specified) and applies the default DocBook stylesheets
+       (if no custom layout options are defined).-->At the end of the
+       transformation process, &dapsacr; shows a message where to find the
+       generated output file. By default, all contents generated by
+       &dapsacr; is located in the <filename>build</filename> subdirectory.
+       It is automatically created within your project directory. </para>
+   </step>
+   <step>
+    <para>
+     Check your project directory for the new files: The text file
+     <filename>&dc;-*</filename> is annotated and gives you a general idea
+     which options can be defined in a &dc; file. For having a look at the XML
+     source code of the example document, change to the
+     <filename>xml</filename> subdirectory and open the file
+     <filename>MAIN-*.xml</filename> in a text editor or XML editor.  
+    </para>
+   </step>
+  </procedure>
+ </sect1>
+ <sect1 id="sec.daps.quick.edit">
+  <title>Editing DocBook XML Files</title>
+&daps-editor;
+
+&db-structure-elements;
+ </sect1>
+ <sect1 id="sec.daps.quick.validate">
+  <title>Validation</title>
+  &daps-validation-basics;
+
+  &daps-example-validation-error;
+   </sect1>
+ <sect1 id="sec.daps.quick.imgs">
+  <title>Image Handling</title>
+  &daps-images-intro;
+
+  <sect2 id="sec.daps.quick.imgs.types">
+   <title>Supported Image Types</title>
+  &daps-img-formats;
+  </sect2>
+
+  <sect2 id="sec.daps.quick.imgs.path">
+   <title>Organization of the <filename>images</filename> Directory</title>
+   <para>
+    &daps-images-dir; For a more detailed reference to the directory
+    structure, see <xref linkend="sec.daps.quick.basics.dirstruct"/>.
+   </para>
+  </sect2>
+
+  <sect2 id="sec.daps.quick.imgs.req">
+   <title>Image File Name Requirements</title>
+   <para>For details, see <xref linkend="sec.daps.quick.basics.namereq"
+   />.
+   </para>
+  </sect2>
+
+ <sect2 id="sec.daps.quick.imgs.refer">
+  <title>Referencing Images</title>
+  &daps-img-ref;
+  <example id="ex.daps.quick.xml.img.ref">
+   <title>Image Reference in an XML File</title>
+   &ex-daps-img-ref;
+  </example>
+ </sect2>
+</sect1>
+<sect1 id="sec.daps.quick.syntax">
+ <title>Basic &dapsacr; Syntax</title>
+
+ <para>
+   Before introducing the key <command>daps</command> commands to create
+   output formats from your XML documents, let's get familiar with the basic
+   syntax of the <command>daps</command> command:
+  </para>
+
+ &daps-cmd-basic-syntax;
+
+ <para>
+  <xref linkend="ex.daps.syntax"/> shows an example command that generates
+   HTML output. Global options are used to specify the level of verbosity,
+   and the &dclong; file for creating the output.
+  </para>
+
+  <!--taroth 2013-01-15: cave, same contents in DAPS User Guide
+  (daps_user_concept.xml, see id=sec.daps.user.syntax)-->
+
+  <!--taroth 2013-01-15: impossible to source out to phrases-decl.ent and
+  include it multiple times (callout IDs!)-->
+
+ <example id="ex.daps.syntax">
+  <title>&dapsacr; Syntax</title>
+  <screen>daps<co id="co.daps.syntax.main"/> --debug<co id="co.daps.syntax.debug"/> -d<co id="co.daps.syntax.dc"/> &dc;-daps-example html<co id="co.daps.syntax.output"/> --static<co id="co.daps.syntax.static"/></screen>
+  <calloutlist>
+   <callout arearefs="co.daps.syntax.main">
+    <para>
+      Main command: <command>daps</command>
+    </para>
+   </callout>
+   <callout arearefs="co.daps.syntax.debug">
+    <para>
+      Global Option <option>--debug</option>: Sets the highest verbosity level
+      (number of messages shown during the conversion process from XML to
+      HTML).
+    </para>
+   </callout>
+   <callout arearefs="co.daps.syntax.dc">
+    <para>
+      Global Option <option>-d</option>: Defines the relative or absolute
+      path to the &dclong; file. In this example, <command>daps</command> is
+      called in the same directory that holds the &dclong; file.
+     </para>
+   </callout>
+   <callout arearefs="co.daps.syntax.output">
+    <para>
+      Subcommand <command>html</command>: Defines the output format to
+      create.
+     </para>
+   </callout>
+   <callout arearefs="co.daps.syntax.static">
+    <para>
+      Command option <option>--static</option>: Instructs &dapsacr; to copy
+      CSS and image files to the same location like the HTML files. For more
+      information, see <xref linkend="tab.daps.quick.output.overview"/>.   
+    </para>
+   </callout>
+  </calloutlist>
+ </example>
+
+ &daps-dc-file-tip;
+
+ &daps-help-basics;
+
+ <para>
+   The following section introduces the key <command>daps</command> commands
+   for generating output formats from XML files. All examples are based on the
+   files generated by the &dapsacr; init script. For more information, refer
+   to <xref linkend="sec.daps.quick.init"/>.
+ </para>
+</sect1>
+<sect1 id="sec.daps.quick.output">
+ <title>Output Formats</title>
+
+ <para>
+   By default, the DocBook stylesheets are used for generating output
+   formats. But &dapsacr; also allows you to easily customize your output
+   formats. For more details, refer to <xref linkend="cha.daps.user.layout"/>.
+ </para>
+
+ <sect2 id="sec.daps.quick.output.syntax">
+  <title>Basic Syntax for Generating Output</title>
+   <para>
+     &dapsacr; supports various different output formats, including also
+     <quote>exotic</quote> <remark>dpopov 2016-10-10: Drop exotic,
+     as it doesn't serve any purpose.</remark> formats like man pages or
+     simple text.
+   <xref linkend="tab.daps.quick.output.overview" xrefstyle="select:label"/>
+   gives an overview.
+   </para>
+ &daps-output-cmd-basics;
+  <para>
+    If your current directory is not the documentation directory where the
+    &dc; file is located, also specify the (absolute or relative) path to
+    the &dc; file. For example:
+   </para>
+  <screen>&prompt.user;<command>daps -d /svn/daps/example/&dc;-daps-example pdf</command></screen>
+ </sect2>
+
+ <sect2 id="sec.daps.quick.output.formats">
+  <title>Generating Different Output Formats</title>
+  <para>The following table lists the main output formats and their
+ characteristics, and the &dapsacr; subcommands to generate them. Refer to
+ <xref linkend="sec.daps.quick.output.syntax" xrefstyle="select:label"/>
+ for the commands' basic syntax.</para>
+  <table id="tab.daps.quick.output.overview">
+   <title>&dapsacr; Output Commands and Formats</title>
+   <xi:include href="daps_table_output_formats_i.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  </table>
+  &daps-output-all;
+   <para>
+     &dapsacr; allows you to fine-tune the output in many ways <remark>dpopov
+     2016-10-10: "in many ways" is redundant</remark>. For example, you can
+     include remarks or a <literal>DRAFT</literal> watermark in your output,
+     or you can build parts of your documentation project only. Find some
+     examples in the sections below.
+   </para>
+ </sect2>
+
+ 
+  <sect2 id="sec.daps.quick.output.partial">
+   <title>Partial Builds</title>
+   &daps-partial-builds;
+   <para> For example, if you have set up your working environment with
+    <command>daps-init</command> and an example book, use the following command
+    to build the first chapter of the book: </para>
+   <screen>&prompt.user;<command>daps -d &dc;-daps-example pdf&nbsp;--rootid=cha.template.examples</command></screen>
+    </sect2>
+  <sect2 id="sec.daps.quick.output.review">
+   <title>Output with Remarks or Draft Watermark</title>
+   <para>
+     For publishing a pre-release version of a document that you can
+     send to a proofreader for review, use the <option>--draft</option>
+     option to mark the document accordingly. For example:
+    </para>
+   <screen>&prompt.user;<command>daps -d &dc;-daps-example pdf --draft</command></screen>
+   <para>This command creates a color PDF that has a <literal>DRAFT</literal>
+    watermark printed on each page.</para>
+   <para>
+     If you used <sgmltag>remark</sgmltag> elements in your XML files (for
+     editorial remarks or questions to the proofreader), you can include the remarks
+     in the output with the <option>--remarks</option> option:
+    </para>
+   <screen>&prompt.user;<command>daps -d &dc;-daps-example pdf --remarks</command></screen>
+      &daps-output-remarks;
+  <!-- <para>If metadata to a file has been set<remark>taroth 2013-01-08: which
+     metadata exactly? does it need to be: doc:status, doc:maintainer?</remark>,
+     &dapsacr; can also include the metadata for each file in the output
+     format:</para>
+      <screen>&prompt.user;daps -d &dc;-daps-example pdf -/-meta</screen>
+-->
+   &daps-note-output-adv;
+  </sect2>
+ 
+</sect1>
+<sect1 id="sec.daps.quick.migrate">
+ <title>Migration of Existing DocBook Projects</title>
+ <para>
+  To migrate existing DocBook projects so that you can manage and publish
+  them with &dapsacr;, follow the step-by-step instructions in
+  <xref linkend="app.daps.user.migrate"/>.
+  </para>
+</sect1>
+
+<sect1 id="sec.daps.quick.more">
+ <title>For More Information</title>
+
+ <para>
+   This guide gave you a short introduction to &dapsacr; and guided you
+   through the key tasks. To discover more, refer to the other manuals
+   available on &dapsacr; at
+   <ulink url="http://opensuse.github.io/daps/"/>.
+  </para>
+   &daps-feedback;
+  <para>
+   For a complete DocBook reference, see
+   <ulink url="http://www.docbook.org/tdg/en/html/docbook.html">
+   <citetitle>&tdg;</citetitle>
+  </ulink>.
+  </para>
+
+ <para>For an overview of the key terms used in the context of &dapsacr; and
+  DocBook, refer to <xref linkend="gl.daps"/>.</para>
+
+ <para>
+   If you encounter problems with &dapsacr;, check
+   <xref linkend="cha.daps.user.trouble"/> for a list of common problems and
+   their solutions.
+  </para>
+</sect1>
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="common_gfdl_i.xml"/>
+</article>
