@@ -197,37 +197,37 @@ image::test.png[Test Image]
 [[art.daps.asciidoc.output]]
 == 利用 {daps} 输出文件
 
-After you have set up the directory structure, created {adoc} documents, and images (optionally), you can use {daps} to create PDFs, HTML, EPUB and other output formats.
-The command line syntax is the same as with {db} projects:
+在您完成目录结构设置，{adoc} 文档创建，以及图像（可选）添加之后，您可以使用 {daps} 生成 PDF，HTML，EPUB以及其他输出格式。
+命令行的指令与 {db} 项目相同：
 
-.Example: Creating HTML output
+.Example: 生成 HTML 输出
 [source]
 ----
 daps -d DC-_MYADOC_  html
 ----
 
-.Example: Creating Single Page HTML Output
+.Example: 生成单页 HTML 输出
 [source]
 ----
 daps -d DC-_MYADOC_  html --single
 ----
 
-.Example: Creating a PDF Directly from an {adoc} Source File
+.Example: 直接从 {adoc} 源码生成 PDF
 [source]
 ----
 daps -m adoc/_MYADOC_.adoc pdf
 ----
 
-For more information, refer to `daps --help`.
-Help on the {daps} subcommands is available with the command `daps <SUBCOMMAND> help`.
+更多信息，参考 `daps --help`。
+有关 {daps} 子指令的参考帮助，可以使用命令 `daps <SUBCOMMAND> help`。
 
 === 输出部分内容
 
-If you want to create output for parts of the documents (for example, to send a single chapter or section for review), you do not need to create the whole document and cut out the parts you need.
-{daps} supports creating partial documents on section titles for any of the supported output formats.
-All that is required is an anchor preceding the section title:
+如果您希望生成文档的一部分输出 (例如，为了发送单个章节，或者段落用于校对审核)，您不需要生成整个文档，而只需要摘取其中需要的部分。
+{daps} 支持以各种支持的输出格式根据章节标题的摘取文档。
+这种操作所需要的只是在需要处理的段落标题前添加一个声明：
 
-.Example: Section title with an Anchor
+.Example: 章节标题声明
 [source,asciidoc]
 ----
 [[new_chapter]]
