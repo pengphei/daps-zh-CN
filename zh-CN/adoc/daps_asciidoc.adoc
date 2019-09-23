@@ -143,27 +143,27 @@ XSLTPARAM="--stringparam homepage=https://github.com/openSUSE/daps"
 XSLTPARAM+="--param variablelist.as.blocks=1"
 ----
 
-<1> Name of the main {adoc} file from the `adoc/` directory. You do not need to specify the full path, {daps} will automatically find it.
-<2> Path to the image directory containing images referenced in the {adoc} sources. If you specify a relative path (recommended for portability), it needs to be specified relative to the directory containing the DC file.
-<3> Document type (`article`, `book`, `manpage`).
-<4> Parameter for applying the (default) post-processing XSLT stylesheet. It cleans up some of the DocBook XML constructs created by `asciidoctor`.
-<5> For a custom layout, use the STYLEROOT parameter to specify the path to the directory containing the custom XSLT stylesheets. If not specified, {daps} will use the default DocBook stylesheets. For an introduction on how to create custom stylesheets, refer to https://opensuse.github.io/daps/doc/cha.daps.user.layout.html#sec.daps.user.layout.styleheets[Customizing the DocBook Stylesheets] (requires XSLT knowledge).
-<6> If the stylesheets allow customization via parameters, you can specify these parameters here.
+<1> `adoc/` 目录下的主 {adoc} 文件名称。您不需要指定完整的路径，{daps} 可以自动找到对应文件。
+<2> 图片目录路径，其中包含 {adoc} 源码中引用的图片。如果您指定一个相对路径（推荐，便于移植），它的路径需要是相对于包含 DC 文件的目录指定。
+<3> 文档类型（`article`, `book`, `manpage`）。
+<4> 用于（默认）后处理 XSLT 样式表的参数。它将会清理一些由 `asciidoctor` 创建的 DocBook XML 结构。
+<5> 对于自定义布局，使用 STYLEROOT 指定包含自定义 XSLT 样式表的目录路径。如果未指定，{daps}将会使用默认的DocBook 样式表。关于如何创建自定义样式表的介绍，参考 https://opensuse.github.io/daps/doc/cha.daps.user.layout.html#sec.daps.user.layout.styleheets[定制 DocBook 样式表] (需要XSLT 基础知识)。
+<6> 如果样式表运行通过参数定制，您可以在此指定这些参数。
 
-The example above only shows a few options you can set.
-For a complete reference, refer to the {daps} configuration file at `/etc/daps/config`. An overview of the {adoc}-specific configuration options is also available at <<config-settings>>.
+上述示例仅提供了少数您可以设置的参数。The example above only shows a few options you can set.
+更完整的说明，参考 {daps} 配置文件 `/etc/daps/config`。{adoc} 相关配置项也可以参考 <<config-settings>> 。
 
 === 图像链接和处理
 
-One of the core features of {daps} is automatic image conversion.
-Whether images need to be converted to grayscale for a printable PDF, whether `.dia` images need to be converted to SVG, or whether `.svg` images need to be converted to PNG--{daps} automatically takes care.
-You only need to make sure that the image is available in a supported format in the {adoc} images directory. Refer to https://opensuse.github.io/daps/doc/cha.daps.user.img.html[Image Handling] for details.
+{daps} 最核心的功能之一是自动图片转换。
+图像是否需要缩放转换为可打印的PDF，`.dia` 图像是否需要转换为 SVG，或者 `.svg` 图像是否需要转换为 PNG，--{daps} 都可以自动处理。
+您只需要确保图像位于图片目录，是 {adoc} 支持的一种格式。更多细节参考 https://opensuse.github.io/daps/doc/cha.daps.user.img.html[图片处理] 。
 
-When linking an image in the {adoc} sources, use the attribute `:imagesdir:` in the document header. Always use the file name only.
-The path for `:imagesdir:` is best specified relatively (relative to the `adoc/` directory).
-Specifying `:imagesdir:` is optional, but recommended. It allows you to also process your {adoc} sources with tools other than {daps}.
+在 {adoc} 源码中链接图片时，需要在文档头部使用 `:imagesdir:`。且并且仅使用文件名称。
+`:imagesdir:` 的路径最好指定为相对路径（相对于 `adoc/` 目录）。
+指定 `:imagesdir:` 是可选项，但是推荐使用。它允许您也可以使用 {daps} 之外的工具来处理 {adoc} 源码。
 
-.Example: Linking Images in {adoc}   
+.Example: {adoc} 中链接图片
 [source]
 ----
 = Linking images
@@ -176,8 +176,8 @@ This is an example of how to link images in AsciiDoc documents processed with DA
 image::test.png[Test Image]
 ----
 
-For the example above, the images need to reside in `adoc/images`.
-Possible sources for the images in `adoc/images` are:
+对于上面的例子，图片需要放置在 `adoc/images`。
+源码中的声明可能指向的 `adoc/images` 中的图片如下：
 
 * `adoc/images/test.dia`
 * `adoc/images/test.fig`
@@ -185,16 +185,14 @@ Possible sources for the images in `adoc/images` are:
 * `adoc/images/test.png`
 * `adoc/images/test.svg`
 
-The {adoc} source example requests a PNG file. If it exists, it will be used as is.
-If it does not exist, {daps} will search for an image with the base name
-`test` (`test.svg`, `test.dia`, or `test.fig`) and automatically convert it
-to PNG.
+{adoc} 源码示例需要一个 PNG 文件。如果存在，它将如此使用。
+如果不存在，{daps} 将会查找具有基本名称为 `test` 的图片(`test.svg`, `test.dia`, or `test.fig`)，然后自动转换为 PNG 格式。
 
-.Unique Image Names
+.唯一图像名称
 [IMPORTANT]
-Because of the procedure described above, {daps} requires unique base names for images.
-If you would have two files with different content but the same base name, for example `test.svg` and `test.dia`, the outcome of an automatic conversion would be uncertain (could be either one of the two files).
-Therefore make sure to always use unique base names. To test for non-unique images, use the following daps command: `daps -d <DCFILE> list-images-multisrc`.
+由于上述的流程，{daps} 需要图像具备唯一的基本名称。
+如果您有两个不同内容的图片，但是具有相同的基本名称，例如 `test.svg` 和 `test.dia`，最终自动转换的输出可能具有不确定性（可能会是两个文件中的任意一个）。
+因此需要确保总是使用唯一的基本名称。对于非唯一图像名称的测试，使用 daps 指令：`daps -d <DCFILE> list-images-multisrc`。
 
 [[art.daps.asciidoc.output]]
 == 利用 {daps} 输出文件
